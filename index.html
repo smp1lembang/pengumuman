@@ -572,7 +572,7 @@ function getOpenTime() {
   const mo = now.getUTCMonth();
   const d = now.getUTCDate();
   // 20.00 WITA = 12.00 UTC (WITA - 8 jam)
-  let open = new Date(Date.UTC(y, mo, d, 11, 13, 0)); // TESTING: ganti ke 12,0,0 sebelum rilis!
+  let open = new Date(Date.UTC(y, mo, d, 12, 30, 0)); // 20.30 WITA = 12.30 UTC
   // Jika sudah lewat tengah malam UTC dan belum jam 12 UTC,
   // berarti target hari ini belum tiba — tidak perlu adjust
   return open;
