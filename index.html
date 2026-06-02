@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengumuman Kelulusan — UPT SMP Negeri 1 Lembang</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F0EAD6;
+    --cream-dim: #B8AF99;
+    --red: #8B0000;
+    --red-bright: #C0392B;
+    --dark: #0D0C0A;
+    --dark-mid: #1A1814;
+    --dark-surface: #201E1A;
+    --gold: #C8A84B;
+    --green: #1A7A3C;
+    --green-bright: #2DC653;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── VIGNETTE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.35;
+  }
+
+  /* ── FIREWORKS ── */
+  #fw-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  /* ── PAGE ── */
+  .page {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem 4rem;
+  }
+
+  /* ── TOP LINE ── */
+  .top-rule {
+    width: 100%;
+    max-width: 560px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--red), var(--red-bright), var(--red), transparent);
+    margin-bottom: 2rem;
+    animation: flare 3s ease-in-out infinite;
+  }
+
+  @keyframes flare {
+    0%,100% { opacity: 0.6; }
+    50%      { opacity: 1; box-shadow: 0 0 18px var(--red-bright); }
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: revealDown 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .instansi {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-bottom: 0.8rem;
+  }
+
+  .school-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 7vw, 3.8rem);
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(200,168,75,0.2);
+  }
+
+  .school-name span {
+    color: var(--gold);
+  }
+
+  .kab {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-top: 0.5rem;
+    opacity: 0.7;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 1rem auto 2.5rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.4));
+  }
+  .divider-line.right {
+    background: linear-gradient(90deg, rgba(200,168,75,0.4), transparent);
+  }
+  .divider-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── PENGUMUMAN LABEL ── */
+  .announce-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.4rem);
+    letter-spacing: 0.3em;
+    color: var(--red-bright);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.3rem;
+    animation: pulse-red 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-red {
+    0%,100% { text-shadow: 0 0 8px rgba(192,57,43,0.4); }
+    50%      { text-shadow: 0 0 20px rgba(192,57,43,0.9); }
+  }
+
+  .announce-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 6vw, 2.8rem);
+    font-weight: 700;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .announce-year {
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--cream-dim);
+    margin-bottom: 3rem;
+    opacity: 0.65;
+  }
+
+  /* ── COUNTDOWN ── */
+  #countdown-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    animation: revealUp 1.2s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .countdown-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-bottom: 1.2rem;
+    opacity: 0.6;
+  }
+
+  .countdown-grid {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+  }
+
+  .cd-box {
+    background: var(--dark-surface);
+    border: 1px solid rgba(200,168,75,0.15);
+    border-top: 2px solid var(--red);
+    padding: 1rem 1.2rem;
+    min-width: 76px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cd-box::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.2), transparent);
+  }
+
+  .cd-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 7vw, 3.2rem);
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .cd-unit {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-top: 0.3rem;
+    opacity: 0.5;
+  }
+
+  .cd-done-msg {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ── FORM CARD ── */
+  #form-section {
+    width: 100%;
+    max-width: 460px;
+    animation: revealUp 1.2s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .card {
+    background: var(--dark-surface);
+    border: 1px solid rgba(200,168,75,0.12);
+    border-top: 2px solid rgba(139,0,0,0.8);
+    padding: 2.5rem 2rem;
+    position: relative;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.2), transparent);
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    color: var(--cream-dim);
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0.7;
+  }
+
+  .field { margin-bottom: 1.2rem; }
+
+  label {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-bottom: 0.5rem;
+    opacity: 0.6;
+  }
+
+  input {
+    width: 100%;
+    background: rgba(13,12,10,0.8);
+    border: 1px solid rgba(200,168,75,0.15);
+    border-bottom: 1px solid rgba(200,168,75,0.35);
+    padding: 0.85rem 1rem;
+    color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+    border-radius: 0;
+  }
+
+  input:focus {
+    border-color: rgba(200,168,75,0.5);
+    background: rgba(13,12,10,0.95);
+  }
+
+  input::placeholder { color: rgba(240,234,214,0.15); }
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); }
+
+  .btn-cek {
+    width: 100%;
+    margin-top: 0.8rem;
+    padding: 1rem;
+    background: var(--red);
+    border: none;
+    color: var(--cream);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-cek::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.06));
+  }
+
+  .btn-cek:hover:not(:disabled) {
+    background: var(--red-bright);
+  }
+
+  .btn-cek:active:not(:disabled) { transform: scale(0.99); }
+  .btn-cek:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── LOCKED ── */
+  .locked-overlay {
+    text-align: center;
+    padding: 1.5rem 0 0.5rem;
+  }
+
+  .lock-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.4;
+    filter: grayscale(1);
+  }
+
+  .locked-text {
+    font-size: 0.88rem;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    opacity: 0.55;
+    font-style: italic;
+  }
+
+  /* ── RESULT ── */
+  #result-area { margin-top: 1.5rem; }
+
+  .result-lulus {
+    border-top: 3px solid var(--green-bright);
+    background: rgba(26,122,60,0.1);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+  }
+
+  .result-tidak {
+    border-top: 3px solid var(--red-bright);
+    background: rgba(139,0,0,0.1);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+  }
+
+  .result-error {
+    border-top: 1px solid rgba(200,168,75,0.2);
+    background: rgba(255,255,255,0.02);
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+    color: var(--cream-dim);
+    font-size: 0.88rem;
+    opacity: 0.7;
+  }
+
+  .result-nama {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .result-nisn {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--cream-dim);
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    letter-spacing: 0.15em;
+    padding: 0.2em 1em;
+  }
+
+  .badge-lulus {
+    color: var(--green-bright);
+    text-shadow: 0 0 30px rgba(45,198,83,0.8);
+    animation: glow-green 1.5s ease infinite;
+  }
+
+  .badge-tidak {
+    color: var(--red-bright);
+    text-shadow: 0 0 20px rgba(192,57,43,0.6);
+  }
+
+  @keyframes glow-green {
+    0%,100% { text-shadow: 0 0 20px rgba(45,198,83,0.6); }
+    50%      { text-shadow: 0 0 50px rgba(45,198,83,1), 0 0 80px rgba(45,198,83,0.4); }
+  }
+
+  .selamat-text {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--cream-dim);
+    opacity: 0.65;
+    font-style: italic;
+  }
+
+  /* ── BOTTOM LINE ── */
+  .bottom-rule {
+    width: 100%;
+    max-width: 560px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,168,75,0.2), transparent);
+    margin-top: 3rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 1.5rem;
+    color: rgba(240,234,214,0.2);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ── SPINNER ── */
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(240,234,214,0.2);
+    border-top-color: var(--cream);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes revealDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<canvas id="fw-canvas"></canvas>
+
+<div class="page">
+
+  <div class="top-rule"></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="instansi">Pemerintah Kabupaten Pinrang · Dinas Pendidikan</div>
+    <div class="school-name">UPT SMP <span>Negeri 1</span> Lembang</div>
+    <div class="kab">Kabupaten Pinrang · Sulawesi Selatan</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line right"></div>
+    </div>
+    <div class="announce-label">Pengumuman Resmi</div>
+    <div class="announce-title">Kelulusan Peserta Didik</div>
+    <div class="announce-year">TAHUN PELAJARAN 2025 / 2026</div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div id="countdown-section">
+    <div class="countdown-label">Pengumuman dibuka pukul 20.00 WITA</div>
+    <div class="countdown-grid" id="cd-grid">
+      <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-unit">Jam</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-unit">Menit</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-unit">Detik</div></div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div id="form-section">
+    <div class="card">
+      <div class="card-title">Masukkan Data Peserta Didik</div>
+
+      <div id="form-body">
+        <div class="field">
+          <label>Nomor Induk Siswa Nasional (NISN)</label>
+          <input type="text" id="inp-nisn" placeholder="Contoh: 0012345678" maxlength="20" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label>Tanggal Lahir</label>
+          <input type="date" id="inp-tgl">
+        </div>
+        <button class="btn-cek" id="btn-cek" onclick="cekKelulusan()">CEK KELULUSAN</button>
+      </div>
+
+      <div id="locked-body" style="display:none;">
+        <div class="locked-overlay">
+          <div class="lock-icon">🔒</div>
+          <div class="locked-text">
+            Pengumuman kelulusan akan dibuka<br>
+            pada pukul <strong style="color:var(--cream);opacity:1;">20.00 WITA</strong> malam ini.<br>
+            Mohon bersabar.
+          </div>
+        </div>
+      </div>
+
+      <div id="result-area"></div>
+    </div>
+  </div>
+
+  <div class="bottom-rule"></div>
+
+</div>
+
+<footer>© 2026 UPT SMP Negeri 1 Lembang · Kabupaten Pinrang</footer>
+
+<script>
+// ── CONFIG ──
+const SHEET_ID  = '1LK9f5np9Cw7cBc4oSEzp0deyw9JWqx1ziLX7Xcinfjc';
+const CSV_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+const OPEN_HOUR = 20;
+const OPEN_MIN  = 0;
+
+// WITA = UTC+8, jam buka 20.00 WITA = 12.00 UTC
+function getOpenTime() {
+  const now = new Date();
+  // Ambil tanggal hari ini dalam UTC
+  const y = now.getUTCFullYear();
+  const mo = now.getUTCMonth();
+  const d = now.getUTCDate();
+  // 20.00 WITA = 12.00 UTC (WITA - 8 jam)
+  let open = new Date(Date.UTC(y, mo, d, 11, 13, 0)); // TESTING: ganti ke 12,0,0 sebelum rilis!
+  // Jika sudah lewat tengah malam UTC dan belum jam 12 UTC,
+  // berarti target hari ini belum tiba — tidak perlu adjust
+  return open;
+}
+
+function isOpen() { return new Date() >= getOpenTime(); }
+
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const diff = getOpenTime() - new Date();
+  const formBody   = document.getElementById('form-body');
+  const lockedBody = document.getElementById('locked-body');
+  const cdGrid     = document.getElementById('cd-grid');
+
+  if (diff <= 0) {
+    cdGrid.innerHTML = '<div class="cd-done-msg" style="letter-spacing:0.1em;font-size:0.9rem;">Pengumuman sudah dibuka</div>';
+    formBody.style.display   = '';
+    lockedBody.style.display = 'none';
+    return;
+  }
+
+  formBody.style.display   = 'none';
+  lockedBody.style.display = '';
+
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ── CEK KELULUSAN ──
+async function cekKelulusan() {
+  if (!isOpen()) return;
+
+  const nisn = document.getElementById('inp-nisn').value.trim();
+  const tgl  = document.getElementById('inp-tgl').value;
+
+  if (!nisn || !tgl) {
+    showResult('error', 'Harap isi NISN dan Tanggal Lahir terlebih dahulu.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-cek');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>';
+
+  try {
+    const res  = await fetch(CSV_URL);
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    const found = rows.slice(1).find(row => {
+      const rNisn = (row[0]||'').trim();
+      const rTgl  = normDate((row[2]||'').trim());
+      return rNisn === nisn && rTgl === tgl;
+    });
+
+    if (!found) {
+      showResult('error', 'Data tidak ditemukan. Periksa kembali NISN dan Tanggal Lahir Anda.');
+    } else {
+      const nama   = (found[1]||'').trim();
+      const status = (found[3]||'').trim().toUpperCase();
+      const lulus  = status.includes('LULUS') && !status.includes('TIDAK');
+      showResult(lulus ? 'lulus' : 'tidak', nama, nisn, status, lulus);
+    }
+  } catch(e) {
+    showResult('error', 'Gagal mengambil data. Pastikan koneksi internet stabil, lalu coba lagi.');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'CEK KELULUSAN';
+}
+
+function parseCSV(text) {
+  return text.split('\n').map(line => {
+    const result = []; let cur = ''; let inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { result.push(cur); cur = ''; }
+      else { cur += ch; }
+    }
+    result.push(cur);
+    return result;
+  });
+}
+
+function normDate(str) {
+  const m1 = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+  if (m1) return `${m1[3]}-${m1[2].padStart(2,'0')}-${m1[1].padStart(2,'0')}`;
+  return str;
+}
+
+function showResult(type, msg, nisn, status, lulus) {
+  const area = document.getElementById('result-area');
+  if (type === 'error') {
+    area.innerHTML = `<div class="result-error">${msg}</div>`;
+    return;
+  }
+  if (lulus) {
+    area.innerHTML = `
+      <div class="result-lulus">
+        <div class="result-nama">${msg}</div>
+        <div class="result-nisn">NISN ${nisn}</div>
+        <div><span class="status-badge badge-lulus">LULUS</span></div>
+        <div class="selamat-text">Selamat! Semoga menjadi bekal terbaik untuk masa depanmu.</div>
+      </div>`;
+    launchFireworks();
+  } else {
+    area.innerHTML = `
+      <div class="result-tidak">
+        <div class="result-nama">${msg}</div>
+        <div class="result-nisn">NISN ${nisn}</div>
+        <div><span class="status-badge badge-tidak">TIDAK LULUS</span></div>
+        <div class="selamat-text">Jangan menyerah. Terus semangat berjuang.</div>
+      </div>`;
+  }
+}
+
+// ── FIREWORKS ──
+const fwCanvas = document.getElementById('fw-canvas');
+const fwCtx    = fwCanvas.getContext('2d');
+let particles  = [];
+
+function resizeFW() { fwCanvas.width = window.innerWidth; fwCanvas.height = window.innerHeight; }
+resizeFW();
+window.addEventListener('resize', resizeFW);
+
+function launchFireworks() {
+  particles = [];
+  let bursts = 0;
+
+  function burst() {
+    if (bursts >= 20) return;
+    const x = Math.random() * fwCanvas.width;
+    const y = Math.random() * fwCanvas.height * 0.65;
+    const colors = ['#F5C842','#FFE385','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DDA0DD','#98FB98','#FF7F50'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const count = 90 + Math.floor(Math.random() * 60);
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 / count) * i + Math.random() * 0.3;
+      const speed = 2 + Math.random() * 7;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1, color,
+        size: 2 + Math.random() * 3,
+        decay: 0.012 + Math.random() * 0.01,
+        gravity: 0.07
+      });
+    }
+    bursts++;
+    setTimeout(burst, 280 + Math.random() * 350);
+  }
+
+  burst();
+  animateFW();
+  setTimeout(() => { particles = []; }, 9000);
+}
+
+function animateFW() {
+  if (particles.length === 0) return;
+  fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+  particles = particles.filter(p => {
+    p.x += p.vx; p.y += p.vy;
+    p.vy += p.gravity; p.vx *= 0.98;
+    p.alpha -= p.decay;
+    if (p.alpha <= 0) return false;
+    fwCtx.save();
+    fwCtx.globalAlpha = p.alpha;
+    fwCtx.fillStyle = p.color;
+    fwCtx.shadowColor = p.color;
+    fwCtx.shadowBlur = 6;
+    fwCtx.beginPath();
+    fwCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    fwCtx.fill();
+    fwCtx.restore();
+    return true;
+  });
+  if (particles.length > 0) requestAnimationFrame(animateFW);
+  else fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+}
+</script>
+</body>
+</html>
